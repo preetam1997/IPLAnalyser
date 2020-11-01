@@ -116,5 +116,18 @@ public class IPLTest {
 		}
 	}
 
+	@Test
+	public void givenIPLWicketCsv_WhenSortedbasedOnStrikeRate_ShouldReturnBest() {
+		try {
+			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostWIckets.class, IPL_MOST_WICKETS_CSV_FILE_PATH);
+			String sortedIplData = iplAnalysis.getStrikeRatesWiseSortedIPLMostRunsData();
+			IPLDAO[] mostWicketsCsv = new Gson().fromJson(sortedIplData, IPLDAO[].class);
+			assertEquals("Imran Tahir", mostWicketsCsv[0].playerBowler);
+		} catch (CSVBuilderException e) {
+			e.printStackTrace();
+		}
+	}
+
+
 
 }
