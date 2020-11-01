@@ -11,40 +11,48 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 import csvbuilder.CSVBuilderException;
 import csvbuilder.CSVBuilderFactory;
 import csvbuilder.ICSVBuilder;
 
 import model.IPLDAO;
 
-
 public class IPLDataLoader {
-	
+
 	public List<IPLDAO> iplDaoList = null;
-	
+	public List<IPLDAO> iplDaoBatsmanList = null;
+	public List<IPLDAO> iplDaoBowlerList = null;
+	public List<IPLDAO> iplDaoMergedList = null;
+
 	public IPLDataLoader() {
 		iplDaoList = new ArrayList<>();
-
+		iplDaoBatsmanList = new ArrayList<>();
+		iplDaoBowlerList = new ArrayList<>();
+		iplDaoMergedList = new ArrayList<>();
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public <E> List loadIPLData(Class<E> classType, String csvFilePath, char delimiter)
-			throws CSVBuilderException {
+	public <E> List loadIPLData(Class<E> classType, String csvFilePath, char delimiter) throws CSVBuilderException {
 		try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
 			ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
 			Iterator<E> csvFileIterator = csvBuilder.getCSVFileIterator(reader, classType, delimiter);
 			switch (classType.getSimpleName()) {
 			case "IPLMostRuns":
 				iplDaoList.clear();
-				while (csvFileIterator.hasNext())
-					this.iplDaoList.add(new IPLDAO((IPLMostRuns) csvFileIterator.next()));
+				while (csvFileIterator.hasNext()) {
+					IPLDAO cricketDao = new IPLDAO((IPLMostRuns) csvFileIterator.next());
+					this.iplDaoList.add(cricketDao);
+					this.iplDaoBatsmanList.add(cricketDao);
+				}
 				break;
 
 			case "IPLMostWIckets":
 				iplDaoList.clear();
-				while (csvFileIterator.hasNext())
-					this.iplDaoList.add(new IPLDAO((IPLMostWIckets) csvFileIterator.next()));
+				while (csvFileIterator.hasNext()) {
+					IPLDAO cricketDao = new IPLDAO((IPLMostWIckets) csvFileIterator.next());
+					this.iplDaoList.add(cricketDao);
+					this.iplDaoBowlerList.add(cricketDao);
+				}
 				break;
 			}
 			return iplDaoList;
@@ -52,6 +60,36 @@ public class IPLDataLoader {
 			throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
 		}
 	}
-	
-	
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public <E> List MergeIPLData() throws CSVBuilderException {
+		for (IPLDAO batsman : iplDaoBatsmanList) {
+			for (IPLDAO bowler : iplDaoBowlerList) {
+				if (batsman.player.equals(bowler.playerBowler)) {
+					batsman.averageBowler = bowler.averageBowler;
+					batsman.wickets = bowler.wickets;
+					iplDaoMergedList.add(batsman);
+				}
+			}
+		}
+
+		return iplDaoMergedList;
+
+	}
+
+	public static void main(String[] args) throws CSVBuilderException {
+		IPLDataLoader iplDataLoader = new IPLDataLoader();
+		iplDataLoader.loadIPLData(IPLMostRuns.class,
+				"C:\\Users\\Preetam\\eclipse-workspace\\iplanalysis\\src\\test\\resources\\WP DP Data_01 IPL2019FactsheetMostRuns.csv",
+				',');
+		iplDataLoader.loadIPLData(IPLMostWIckets.class,
+				"C:\\Users\\Preetam\\eclipse-workspace\\iplanalysis\\src\\test\\resources\\WP DP Data_02 IPL2019FactsheetMostWkts.csv",
+				',');
+		System.out.println(iplDataLoader.iplDaoBatsmanList.get(0).player);
+		System.out.println(iplDataLoader.iplDaoBowlerList.get(0).playerBowler);
+		List<IPLDAO> k = iplDataLoader.MergeIPLData();
+		System.out.println(k.get(0).averageBowler);
+		
+	}
+
 }
