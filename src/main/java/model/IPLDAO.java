@@ -47,6 +47,14 @@ public class IPLDAO {
 		return sixes;
 	}
 
+	public double getStrikeRate() {
+		return strikeRate;
+	}
+
+	public void setStrikeRate(double strikeRate) {
+		this.strikeRate = strikeRate;
+	}
+
 	public void setSixes(int sixes) {
 		this.sixes = sixes;
 	}

@@ -30,6 +30,7 @@ public class IPLAnalysis<E> {
 		}
 	}
 
+	// UC1
 	public String getAverageWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
 			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
@@ -40,8 +41,9 @@ public class IPLAnalysis<E> {
 		return sortedMostRuns;
 
 	}
-	
-	public String getStrikeRatesWiseSortedIPLMostRunsData() throws CSVBuilderException{
+
+	// UC2
+	public String getStrikeRatesWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
 			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
 		}
@@ -52,11 +54,26 @@ public class IPLAnalysis<E> {
 
 	}
 
-	public String getFoursandSixesWiseSortedIPLMostRunsData() throws CSVBuilderException{
+	// UC3
+	public String getFoursandSixesWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
 			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
 		}
-		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getSixes,Comparator.reverseOrder()).thenComparing(cricketDAO ->cricketDAO.fours,Comparator.reverseOrder());
+		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getSixes, Comparator.reverseOrder())
+				.thenComparing(cricketDAO -> cricketDAO.fours, Comparator.reverseOrder());
+		this.sort(iplComparator);
+		String sortedMostRuns = new Gson().toJson(iplDaoList);
+		return sortedMostRuns;
+
+	}
+
+	// UC4
+	public String getStrinkeRateFoursandSixesWiseSortedIPLMostRunsData() throws CSVBuilderException {
+		if (iplDaoList == null || iplDaoList.size() == 0) {
+			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+		}
+		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getStrikeRate, Comparator.reverseOrder())
+				.thenComparing(cricketDAO -> cricketDAO.sixes + cricketDAO.fours, Comparator.reverseOrder());
 		this.sort(iplComparator);
 		String sortedMostRuns = new Gson().toJson(iplDaoList);
 		return sortedMostRuns;
