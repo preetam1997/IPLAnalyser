@@ -21,6 +21,8 @@ public class IPLDAO {
 
 	public int positionBowler;
 	public String playerBowler;
+	
+
 	public int matchesBowler;
 	public int inningsBowler;
 	public double overs;
@@ -73,6 +75,9 @@ public class IPLDAO {
 		this.highScore = highScore;
 	}
 
+	public double getStrikeRateBowler() {
+		return strikeRateBowler;
+	}
 	public IPLDAO(IPLMostRuns iplMostRuns) {
 		position = iplMostRuns.position;
 		player = iplMostRuns.player;
