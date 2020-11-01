@@ -131,4 +131,17 @@ public class IPLAnalysis<E> {
 		return sortedMostWickets;
 
 	}
+	
+	// UC9
+		public String getBowlingEconomyRateWiseSortedIPLMostWicketsData() throws CSVBuilderException {
+			if (iplDaoList == null || iplDaoList.size() == 0) {
+				throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			}
+			Comparator<IPLDAO> iplComparator = Comparator.comparing(cricketDAO -> cricketDAO.economy,
+					Comparator.reverseOrder());
+			this.sort(iplComparator);
+			String sortedMostWickets = new Gson().toJson(iplDaoList);
+			return sortedMostWickets;
+
+		}
 }

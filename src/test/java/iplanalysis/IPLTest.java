@@ -127,6 +127,18 @@ public class IPLTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void givenIPLWicketCsv_WhenSortedbasedOnEconomyRate_ShouldReturnBest() {
+		try {
+			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostWIckets.class, IPL_MOST_WICKETS_CSV_FILE_PATH);
+			String sortedIplData = iplAnalysis.getBowlingEconomyRateWiseSortedIPLMostWicketsData();
+			IPLDAO[] mostWicketsCsv = new Gson().fromJson(sortedIplData, IPLDAO[].class);
+			assertEquals("Ben Cutting", mostWicketsCsv[0].playerBowler);
+		} catch (CSVBuilderException e) {
+			e.printStackTrace();
+		}
+	}
 
 
 
