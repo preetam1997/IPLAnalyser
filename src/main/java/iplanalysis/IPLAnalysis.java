@@ -79,4 +79,16 @@ public class IPLAnalysis<E> {
 		return sortedMostRuns;
 
 	}
+	
+	public String getAverageandStrikeRateWiseSortedIPLMostRunsData() throws CSVBuilderException {
+		if (iplDaoList == null || iplDaoList.size() == 0) {
+			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+		}
+		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getAverage, Comparator.reverseOrder())
+				.thenComparing(cricketDAO -> cricketDAO.strikeRate, Comparator.reverseOrder());
+		this.sort(iplComparator);
+		String sortedMostRuns = new Gson().toJson(iplDaoList);
+		return sortedMostRuns;
+
+	}
 }

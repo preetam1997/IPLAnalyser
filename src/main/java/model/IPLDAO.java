@@ -47,6 +47,14 @@ public class IPLDAO {
 		return sixes;
 	}
 
+	public double getAverage() {
+		return average;
+	}
+
+	public void setAverage(double average) {
+		this.average = average;
+	}
+
 	public double getStrikeRate() {
 		return strikeRate;
 	}
