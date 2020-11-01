@@ -78,6 +78,10 @@ public class IPLDAO {
 	public double getStrikeRateBowler() {
 		return strikeRateBowler;
 	}
+	public double getAverageBowler() {
+		return averageBowler;
+	}
+
 	public IPLDAO(IPLMostRuns iplMostRuns) {
 		position = iplMostRuns.position;
 		player = iplMostRuns.player;
