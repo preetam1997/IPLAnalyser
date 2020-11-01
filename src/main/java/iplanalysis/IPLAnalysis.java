@@ -12,6 +12,7 @@ public class IPLAnalysis<E> {
 
 	private List<IPLDAO> iplDaoList = null;
 	public IPLDataLoader iplDataLoader = null;
+
 	public IPLAnalysis(Class<E> classType, String csvFilePath) throws CSVBuilderException {
 		iplDataLoader = new IPLDataLoader();
 		this.iplDaoList = iplDataLoader.loadIPLData(classType, csvFilePath, ',');
@@ -21,7 +22,7 @@ public class IPLAnalysis<E> {
 		iplDataLoader = new IPLDataLoader();
 	}
 
-	private void sort(Comparator<IPLDAO> iplComparator,List<IPLDAO> daoList) {
+	private void sort(Comparator<IPLDAO> iplComparator, List<IPLDAO> daoList) {
 		for (int i = 0; i < daoList.size() - 1; i++) {
 			for (int j = 0; j < daoList.size() - i - 1; j++) {
 				IPLDAO ipl1 = daoList.get(j);
@@ -40,7 +41,7 @@ public class IPLAnalysis<E> {
 			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(ipl -> ipl.average, Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostRuns = new Gson().toJson(iplDaoList);
 		return sortedMostRuns;
 
@@ -52,7 +53,7 @@ public class IPLAnalysis<E> {
 			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(ipl -> ipl.strikeRate, Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostRuns = new Gson().toJson(iplDaoList);
 		return sortedMostRuns;
 
@@ -65,7 +66,7 @@ public class IPLAnalysis<E> {
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getSixes, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.fours, Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostRuns = new Gson().toJson(iplDaoList);
 		return sortedMostRuns;
 
@@ -78,7 +79,7 @@ public class IPLAnalysis<E> {
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getStrikeRate, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.sixes + cricketDAO.fours, Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostRuns = new Gson().toJson(iplDaoList);
 		return sortedMostRuns;
 
@@ -91,7 +92,7 @@ public class IPLAnalysis<E> {
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getAverage, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.strikeRate, Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostRuns = new Gson().toJson(iplDaoList);
 		return sortedMostRuns;
 
@@ -104,7 +105,7 @@ public class IPLAnalysis<E> {
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getHighScore, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.average, Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostRuns = new Gson().toJson(iplDaoList);
 		return sortedMostRuns;
 
@@ -117,7 +118,7 @@ public class IPLAnalysis<E> {
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(cricketDAO -> cricketDAO.averageBowler,
 				Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostWickets = new Gson().toJson(iplDaoList);
 		return sortedMostWickets;
 
@@ -130,7 +131,7 @@ public class IPLAnalysis<E> {
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(cricketDAO -> cricketDAO.strikeRateBowler,
 				Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostWickets = new Gson().toJson(iplDaoList);
 		return sortedMostWickets;
 
@@ -143,7 +144,7 @@ public class IPLAnalysis<E> {
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(cricketDAO -> cricketDAO.economy,
 				Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostWickets = new Gson().toJson(iplDaoList);
 		return sortedMostWickets;
 
@@ -157,7 +158,7 @@ public class IPLAnalysis<E> {
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getStrikeRateBowler, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.fourWickets + cricketDAO.fiveWickets,
 						Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostWickets = new Gson().toJson(iplDaoList);
 		return sortedMostWickets;
 
@@ -170,7 +171,7 @@ public class IPLAnalysis<E> {
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getAverageBowler, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.strikeRateBowler, Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostWickets = new Gson().toJson(iplDaoList);
 		return sortedMostWickets;
 
@@ -183,7 +184,7 @@ public class IPLAnalysis<E> {
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getWickets, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.averageBowler, Comparator.reverseOrder());
-		this.sort(iplComparator,iplDaoList);
+		this.sort(iplComparator, iplDaoList);
 		String sortedMostWickets = new Gson().toJson(iplDaoList);
 		return sortedMostWickets;
 
@@ -197,9 +198,36 @@ public class IPLAnalysis<E> {
 		List<IPLDAO> iplMergedList = iplDataLoader.MergeIPLData();
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getAverage, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.averageBowler);
-		this.sort(iplComparator,iplMergedList);
+		this.sort(iplComparator, iplMergedList);
 		String sortedMostWickets = new Gson().toJson(iplMergedList);
 		return sortedMostWickets;
 
 	}
+
+	// UC14
+	public String getBestAllRounder(Class<E> classType1, Class<E> classType2, String csvFilePath1, String CsvFilePath2)
+			throws CSVBuilderException {
+		iplDataLoader.loadIPLData(classType1, csvFilePath1, ',');
+		iplDataLoader.loadIPLData(classType2, CsvFilePath2, ',');
+		List<IPLDAO> iplMergedList = iplDataLoader.MergeIPLData();
+		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getHighScore, Comparator.reverseOrder())
+				.thenComparing(cricketDAO -> cricketDAO.wickets, Comparator.reverseOrder());
+		this.sort(iplComparator, iplMergedList);
+		String sortedMostWickets = new Gson().toJson(iplMergedList);
+		return sortedMostWickets;
+
+	}
+	
+	// UC15
+		public String getMaxCenturyandbattingAvgWiseSortedIPLMostWicketsData() throws CSVBuilderException {
+			if (iplDaoList == null || iplDaoList.size() == 0) {
+				throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			}
+			Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getWickets, Comparator.reverseOrder())
+					.thenComparing(cricketDAO -> cricketDAO.averageBowler, Comparator.reverseOrder());
+			this.sort(iplComparator, iplDaoList);
+			String sortedMostWickets = new Gson().toJson(iplDaoList);
+			return sortedMostWickets;
+
+		}
 }

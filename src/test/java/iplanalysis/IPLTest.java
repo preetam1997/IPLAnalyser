@@ -183,8 +183,20 @@ public class IPLTest {
 			String sortedIplData = iplAnalysis.getBattingandBowlingAverageWiseSortedIPLMostData(IPLMostRuns.class,
 					IPLMostWIckets.class, IPL_MOST_RUNS_CSV_FILE_PATH, IPL_MOST_WICKETS_CSV_FILE_PATH);
 			IPLDAO[] sortedCsv = new Gson().fromJson(sortedIplData, IPLDAO[].class);
-			System.out.println(sortedCsv.length);
 			assertEquals("Andre Russell", sortedCsv[0].player);
+		} catch (CSVBuilderException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void givenIPLWicketCsv_WhenSortedbasedOnAllRounder_ShouldReturnBest() {
+		try {
+			IPLAnalysis iplAnalysis = new IPLAnalysis();
+			String sortedIplData = iplAnalysis.getBestAllRounder(IPLMostRuns.class,
+					IPLMostWIckets.class, IPL_MOST_RUNS_CSV_FILE_PATH, IPL_MOST_WICKETS_CSV_FILE_PATH);
+			IPLDAO[] sortedCsv = new Gson().fromJson(sortedIplData, IPLDAO[].class);
+			assertEquals("Hardik Pandya", sortedCsv[0].player);
 		} catch (CSVBuilderException e) {
 			e.printStackTrace();
 		}
