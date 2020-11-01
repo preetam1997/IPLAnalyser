@@ -164,5 +164,18 @@ public class IPLTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void givenIPLWicketCsv_WhenSortedbasedOnWicketsandBowlingAverage_ShouldReturnBest() {
+		try {
+			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostWIckets.class, IPL_MOST_WICKETS_CSV_FILE_PATH);
+			String sortedIplData = iplAnalysis.getWicketsandBowlingAverageWiseSortedIPLMostWicketsData();
+			IPLDAO[] mostWicketsCsv = new Gson().fromJson(sortedIplData, IPLDAO[].class);
+			System.out.println(mostWicketsCsv[0].playerBowler);
+			assertEquals("Imran Tahir", mostWicketsCsv[0].playerBowler);
+		} catch (CSVBuilderException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

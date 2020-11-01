@@ -82,6 +82,10 @@ public class IPLDAO {
 		return averageBowler;
 	}
 
+	public int getWickets() {
+		return wickets;
+	}
+
 	public IPLDAO(IPLMostRuns iplMostRuns) {
 		position = iplMostRuns.position;
 		player = iplMostRuns.player;
