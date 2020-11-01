@@ -24,7 +24,7 @@ public class IPLTest {
 			List<IPLDAO> mostRunsList = iplDataLoader.loadIPLData(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH, ',');
 			List<IPLDAO> mostWktsList = iplDataLoader.loadIPLData(IPLMostWIckets.class, IPL_MOST_WICKETS_CSV_FILE_PATH,
 					',');
-			assertEquals(101, mostRunsList.size());
+			assertEquals(99, mostRunsList.size());
 			assertEquals(99, mostWktsList.size());
 		} catch (CSVBuilderException e) {
 		}
@@ -32,7 +32,7 @@ public class IPLTest {
 	}
 
 	@Test
-	public void givenIPLCsv_WhenSortedAverageWise_ShouldReturnHighestAverage() {
+	public void givenIPLCsv_WhenSortedAverageWise_ShouldReturnBest() {
 		try {
 			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH);
 			String sortedIplData = iplAnalysis.getAverageWiseSortedIPLMostRunsData();
@@ -42,9 +42,9 @@ public class IPLTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
-	public void givenIPLCsv_WhenSortedStrikeRateWise_ShouldReturnHighestAverage() {
+	public void givenIPLCsv_WhenSortedStrikeRateWise_ShouldReturnBest() {
 		try {
 			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH);
 			String sortedIplData = iplAnalysis.getStrikeRatesWiseSortedIPLMostRunsData();
@@ -54,9 +54,9 @@ public class IPLTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
-	public void givenIPLCsv_WhenSortedFoursandSixesWise_ShouldReturnHighestAverage() {
+	public void givenIPLCsv_WhenSortedFoursandSixesWise_ShouldReturnBest() {
 		try {
 			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH);
 			String sortedIplData = iplAnalysis.getFoursandSixesWiseSortedIPLMostRunsData();
@@ -66,9 +66,9 @@ public class IPLTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
-	public void givenIPLCsv_WhenSortedbasedOnStrikeRateFoursandSixesWise_ShouldReturnHighestAverage() {
+	public void givenIPLCsv_WhenSortedbasedOnStrikeRateFoursandSixesWise_ShouldReturnBest() {
 		try {
 			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH);
 			String sortedIplData = iplAnalysis.getStrinkeRateFoursandSixesWiseSortedIPLMostRunsData();
@@ -78,9 +78,9 @@ public class IPLTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
-	public void givenIPLCsv_WhenSortedbasedOnAverageandStrikeRate_ShouldReturnHighestAverage() {
+	public void givenIPLCsv_WhenSortedbasedOnAverageandStrikeRate_ShouldReturnBest() {
 		try {
 			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH);
 			String sortedIplData = iplAnalysis.getAverageandStrikeRateWiseSortedIPLMostRunsData();
@@ -90,6 +90,20 @@ public class IPLTest {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void givenIPLCsv_WhenSortedbasedOnMaximumRunsandBestAverage_ShouldReturnBest() {
+		try {
+			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH);
+			String sortedIplData = iplAnalysis.getMaximumRunsandBestAverageWiseSortedIPLMostRunsData();
+			IPLMostRuns[] mostRunsCsv = new Gson().fromJson(sortedIplData, IPLMostRuns[].class);
+
+			assertEquals("Jonny Bairstow", mostRunsCsv[0].player);
+		} catch (CSVBuilderException e) {
+			e.printStackTrace();
+		}
+	}
+
 	
-	
+
 }

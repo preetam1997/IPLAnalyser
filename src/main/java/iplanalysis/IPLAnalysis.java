@@ -79,7 +79,8 @@ public class IPLAnalysis<E> {
 		return sortedMostRuns;
 
 	}
-	
+
+	// UC5
 	public String getAverageandStrikeRateWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
 			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
@@ -91,4 +92,21 @@ public class IPLAnalysis<E> {
 		return sortedMostRuns;
 
 	}
+
+	// UC6
+	public String getMaximumRunsandBestAverageWiseSortedIPLMostRunsData() throws CSVBuilderException {
+		if (iplDaoList == null || iplDaoList.size() == 0) {
+			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+		}
+		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getHighScore, Comparator.reverseOrder())
+				.thenComparing(cricketDAO -> cricketDAO.average, Comparator.reverseOrder());
+		this.sort(iplComparator);
+		String sortedMostRuns = new Gson().toJson(iplDaoList);
+		return sortedMostRuns;
+
+	}
+
+	
+	
+	
 }

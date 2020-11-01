@@ -16,7 +16,7 @@ public class IPLMostWIckets {
     public int innings;
     
     @CsvBindByName(column = "Ov", required = true)
-    public int overs;
+    public double overs;
 
     @CsvBindByName(column = "Runs", required = true)
     public int runs;
@@ -31,7 +31,7 @@ public class IPLMostWIckets {
     public double average;
     
     @CsvBindByName(column = "Econ", required = true)
-    public int economy;
+    public double economy;
     
     @CsvBindByName(column = "SR", required = true)
     public double strikeRate;
