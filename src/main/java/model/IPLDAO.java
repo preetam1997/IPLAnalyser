@@ -11,7 +11,7 @@ public class IPLDAO {
 	public int notOut;
 	public int runs;
 	public String highScore;
-	public String average;
+	public double average;
 	public int ballsFaced;
 	public double strikeRate;
 	public int centuries;

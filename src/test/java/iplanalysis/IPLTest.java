@@ -5,6 +5,7 @@ package iplanalysis;
 
 import org.junit.Test;
 
+import com.google.gson.Gson;
 import csvbuilder.CSVBuilderException;
 import model.IPLDAO;
 
@@ -15,15 +16,42 @@ import java.util.List;
 public class IPLTest {
 	private static final String IPL_MOST_RUNS_CSV_FILE_PATH = "./src/test/resources/WP DP Data_01 IPL2019FactsheetMostRuns.csv";
 	private static final String IPL_MOST_WICKETS_CSV_FILE_PATH = "./src/test/resources/WP DP Data_02 IPL2019FactsheetMostWkts.csv";
+
 	@Test
 	public void givenIPLCsv_WhenLoaded_ShouldReturnCount() {
 		IPLDataLoader iplDataLoader = new IPLDataLoader();
 		try {
 			List<IPLDAO> mostRunsList = iplDataLoader.loadIPLData(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH, ',');
-			List<IPLDAO> mostWktsList = iplDataLoader.loadIPLData(IPLMostWIckets.class, IPL_MOST_WICKETS_CSV_FILE_PATH, ',');
+			List<IPLDAO> mostWktsList = iplDataLoader.loadIPLData(IPLMostWIckets.class, IPL_MOST_WICKETS_CSV_FILE_PATH,
+					',');
 			assertEquals(101, mostRunsList.size());
 			assertEquals(99, mostWktsList.size());
-		} catch (CSVBuilderException e) {}
-		
+		} catch (CSVBuilderException e) {
+		}
+
+	}
+
+	@Test
+	public void givenIPLCsv_WhenSortedAverageWise_ShouldReturnHighestAverage() {
+		try {
+			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH);
+			String sortedIplData = iplAnalysis.getAverageWiseSortedIPLMostRunsData();
+			IPLMostRuns[] mostRunsCsv = new Gson().fromJson(sortedIplData, IPLMostRuns[].class);
+			assertEquals("MS Dhoni", mostRunsCsv[0].player);
+		} catch (CSVBuilderException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void givenIPLCsv_WhenSortedStrikeRateWise_ShouldReturnHighestAverage() {
+		try {
+			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH);
+			String sortedIplData = iplAnalysis.getStrikeRatesWiseSortedIPLMostRunsData();
+			IPLMostRuns[] mostRunsCsv = new Gson().fromJson(sortedIplData, IPLMostRuns[].class);
+			assertEquals("Ishant Sharma", mostRunsCsv[0].player);
+		} catch (CSVBuilderException e) {
+			e.printStackTrace();
+		}
 	}
 }

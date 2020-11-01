@@ -25,7 +25,7 @@ public class IPLMostRuns {
 	    public String highScore;
 	    
 	    @CsvBindByName(column = "Avg", required = true)
-	    public String average;
+	    public double average;
 	    
 	    @CsvBindByName(column = "BF", required = true)
 	    public int ballsFaced;

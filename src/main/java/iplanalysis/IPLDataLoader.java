@@ -53,15 +53,5 @@ public class IPLDataLoader {
 		}
 	}
 	
-	public static void main(String[] args) {
-		IPLDataLoader iplDataLoader = new IPLDataLoader();
-		try {
-			List<IPLDAO> k = iplDataLoader.loadIPLData(IPLMostRuns.class, "C:\\Users\\Preetam\\eclipse-workspace\\iplanalysis\\src\\test\\resources\\WP DP Data_01 IPL2019FactsheetMostRuns.csv", ',');
-			System.out.println(k.get(0).position);
-		} catch (CSVBuilderException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+	
 }
