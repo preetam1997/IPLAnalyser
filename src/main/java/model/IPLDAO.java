@@ -82,6 +82,14 @@ public class IPLDAO {
 		return averageBowler;
 	}
 
+	public int getCenturies() {
+		return centuries;
+	}
+
+	public int getHalfCenturies() {
+		return halfCenturies;
+	}
+
 	public int getWickets() {
 		return wickets;
 	}

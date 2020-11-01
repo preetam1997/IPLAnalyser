@@ -57,7 +57,7 @@ public class IPLDataLoader {
 			}
 			return iplDaoList;
 		} catch (IOException e) {
-			throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
+			throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.CSV_FILE_PROBLEM);
 		}
 	}
 
@@ -77,19 +77,6 @@ public class IPLDataLoader {
 
 	}
 
-	public static void main(String[] args) throws CSVBuilderException {
-		IPLDataLoader iplDataLoader = new IPLDataLoader();
-		iplDataLoader.loadIPLData(IPLMostRuns.class,
-				"C:\\Users\\Preetam\\eclipse-workspace\\iplanalysis\\src\\test\\resources\\WP DP Data_01 IPL2019FactsheetMostRuns.csv",
-				',');
-		iplDataLoader.loadIPLData(IPLMostWIckets.class,
-				"C:\\Users\\Preetam\\eclipse-workspace\\iplanalysis\\src\\test\\resources\\WP DP Data_02 IPL2019FactsheetMostWkts.csv",
-				',');
-		System.out.println(iplDataLoader.iplDaoBatsmanList.get(0).player);
-		System.out.println(iplDataLoader.iplDaoBowlerList.get(0).playerBowler);
-		List<IPLDAO> k = iplDataLoader.MergeIPLData();
-		System.out.println(k.get(0).averageBowler);
-		
-	}
+	
 
 }

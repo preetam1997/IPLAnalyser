@@ -2,6 +2,8 @@ package iplanalysis;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 
@@ -38,7 +40,7 @@ public class IPLAnalysis<E> {
 	// UC1
 	public String getAverageWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(ipl -> ipl.average, Comparator.reverseOrder());
 		this.sort(iplComparator, iplDaoList);
@@ -50,7 +52,7 @@ public class IPLAnalysis<E> {
 	// UC2
 	public String getStrikeRatesWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(ipl -> ipl.strikeRate, Comparator.reverseOrder());
 		this.sort(iplComparator, iplDaoList);
@@ -62,7 +64,7 @@ public class IPLAnalysis<E> {
 	// UC3
 	public String getFoursandSixesWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getSixes, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.fours, Comparator.reverseOrder());
@@ -75,7 +77,7 @@ public class IPLAnalysis<E> {
 	// UC4
 	public String getStrinkeRateFoursandSixesWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getStrikeRate, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.sixes + cricketDAO.fours, Comparator.reverseOrder());
@@ -88,7 +90,7 @@ public class IPLAnalysis<E> {
 	// UC5
 	public String getAverageandStrikeRateWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getAverage, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.strikeRate, Comparator.reverseOrder());
@@ -101,7 +103,7 @@ public class IPLAnalysis<E> {
 	// UC6
 	public String getMaximumRunsandBestAverageWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getHighScore, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.average, Comparator.reverseOrder());
@@ -114,7 +116,7 @@ public class IPLAnalysis<E> {
 	// UC7
 	public String getBowlingAverageWiseSortedIPLMostWicketsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(cricketDAO -> cricketDAO.averageBowler,
 				Comparator.reverseOrder());
@@ -127,7 +129,7 @@ public class IPLAnalysis<E> {
 	// UC8
 	public String getBowlingStrikeRateWiseSortedIPLMostWicketsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(cricketDAO -> cricketDAO.strikeRateBowler,
 				Comparator.reverseOrder());
@@ -140,7 +142,7 @@ public class IPLAnalysis<E> {
 	// UC9
 	public String getBowlingEconomyRateWiseSortedIPLMostWicketsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(cricketDAO -> cricketDAO.economy,
 				Comparator.reverseOrder());
@@ -153,7 +155,7 @@ public class IPLAnalysis<E> {
 	// UC10
 	public String getStrikeRateWith4Wand5WWiseSortedIPLMostWicketsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getStrikeRateBowler, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.fourWickets + cricketDAO.fiveWickets,
@@ -167,7 +169,7 @@ public class IPLAnalysis<E> {
 	// UC11
 	public String getBowlingAverageWithStrikeRateSortedIPLMostWicketsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getAverageBowler, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.strikeRateBowler, Comparator.reverseOrder());
@@ -180,7 +182,7 @@ public class IPLAnalysis<E> {
 	// UC12
 	public String getWicketsandBowlingAverageWiseSortedIPLMostWicketsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
 		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getWickets, Comparator.reverseOrder())
 				.thenComparing(cricketDAO -> cricketDAO.averageBowler, Comparator.reverseOrder());
@@ -219,14 +221,29 @@ public class IPLAnalysis<E> {
 	}
 
 	// UC15
-	public String getMaxCenturyandbattingAvgWiseSortedIPLMostWicketsData() throws CSVBuilderException {
+	public String getMaxCenturyandbattingAvgWiseSortedIPLMostRunsData() throws CSVBuilderException {
 		if (iplDaoList == null || iplDaoList.size() == 0) {
-			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
 		}
-		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getWickets, Comparator.reverseOrder())
-				.thenComparing(cricketDAO -> cricketDAO.averageBowler, Comparator.reverseOrder());
+		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getCenturies, Comparator.reverseOrder())
+				.thenComparing(cricketDAO -> cricketDAO.average, Comparator.reverseOrder());
 		this.sort(iplComparator, iplDaoList);
 		String sortedMostWickets = new Gson().toJson(iplDaoList);
+		return sortedMostWickets;
+
+	}
+
+	// UC16
+	public String getBestBattingAvgWithZeroHundredsOrFifties() throws CSVBuilderException {
+		if (iplDaoList == null || iplDaoList.size() == 0) {
+			throw new CSVBuilderException("No CSV Data", CSVBuilderException.ExceptionType.NO_CSV_DATA);
+		}
+		List<IPLDAO> zero100sOr50s = iplDaoList.stream().filter(dao -> dao.halfCenturies == 0 && dao.centuries == 0)
+				.collect(Collectors.toList());
+		Comparator<IPLDAO> iplComparator = Comparator.comparing(cricketDao -> cricketDao.average,
+				Comparator.reverseOrder());
+		this.sort(iplComparator, zero100sOr50s);
+		String sortedMostWickets = new Gson().toJson(zero100sOr50s);
 		return sortedMostWickets;
 
 	}
