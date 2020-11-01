@@ -201,5 +201,18 @@ public class IPLTest {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	@Test
+	public void givenIPLCsv_WhenSortedbasedOnMaxCenturyandBestAverage_ShouldReturnBest() {
+		try {
+			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH);
+			String sortedIplData = iplAnalysis.getMaxCenturyandbattingAvgWiseSortedIPLMostWicketsData();
+			IPLMostRuns[] mostRunsCsv = new Gson().fromJson(sortedIplData, IPLMostRuns[].class);
+			assertEquals("David Warner", mostRunsCsv[0].player);
+		} catch (CSVBuilderException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

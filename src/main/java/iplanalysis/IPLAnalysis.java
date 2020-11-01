@@ -217,17 +217,17 @@ public class IPLAnalysis<E> {
 		return sortedMostWickets;
 
 	}
-	
-	// UC15
-		public String getMaxCenturyandbattingAvgWiseSortedIPLMostWicketsData() throws CSVBuilderException {
-			if (iplDaoList == null || iplDaoList.size() == 0) {
-				throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
-			}
-			Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getWickets, Comparator.reverseOrder())
-					.thenComparing(cricketDAO -> cricketDAO.averageBowler, Comparator.reverseOrder());
-			this.sort(iplComparator, iplDaoList);
-			String sortedMostWickets = new Gson().toJson(iplDaoList);
-			return sortedMostWickets;
 
+	// UC15
+	public String getMaxCenturyandbattingAvgWiseSortedIPLMostWicketsData() throws CSVBuilderException {
+		if (iplDaoList == null || iplDaoList.size() == 0) {
+			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
 		}
+		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getWickets, Comparator.reverseOrder())
+				.thenComparing(cricketDAO -> cricketDAO.averageBowler, Comparator.reverseOrder());
+		this.sort(iplComparator, iplDaoList);
+		String sortedMostWickets = new Gson().toJson(iplDaoList);
+		return sortedMostWickets;
+
+	}
 }
