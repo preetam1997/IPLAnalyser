@@ -28,7 +28,7 @@ public class IPLMostWIckets {
     public String bestBowlingInInnings;
     
     @CsvBindByName(column = "Avg", required = true)
-    public String average;
+    public double average;
     
     @CsvBindByName(column = "Econ", required = true)
     public int economy;

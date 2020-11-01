@@ -27,13 +27,31 @@ public class IPLDAO {
     public int runsBowler;
     public int wickets;
     public String bestBowlingInInnings;
-    public String averageBowler;
+    public double averageBowler;
     public int economy;
     public double strikeRateBowler;
     public int fourWickets;
     public int fiveWickets;
     
-    public IPLDAO(IPLMostRuns iplMostRuns) {
+    
+    
+    public int getFours() {
+		return fours;
+	}
+
+	public void setFours(int fours) {
+		this.fours = fours;
+	}
+
+	public int getSixes() {
+		return sixes;
+	}
+
+	public void setSixes(int sixes) {
+		this.sixes = sixes;
+	}
+
+	public IPLDAO(IPLMostRuns iplMostRuns) {
     	position = iplMostRuns.position;
     	player = iplMostRuns.player;
     	matches = iplMostRuns.matches;

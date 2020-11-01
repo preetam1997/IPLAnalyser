@@ -54,4 +54,16 @@ public class IPLTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void givenIPLCsv_WhenSortedFoursandSixesWise_ShouldReturnHighestAverage() {
+		try {
+			IPLAnalysis iplAnalysis = new IPLAnalysis(IPLMostRuns.class, IPL_MOST_RUNS_CSV_FILE_PATH);
+			String sortedIplData = iplAnalysis.getFoursandSixesWiseSortedIPLMostRunsData();
+			IPLMostRuns[] mostRunsCsv = new Gson().fromJson(sortedIplData, IPLMostRuns[].class);
+			assertEquals("Andre Russell", mostRunsCsv[0].player);
+		} catch (CSVBuilderException e) {
+			e.printStackTrace();
+		}
+	}
 }

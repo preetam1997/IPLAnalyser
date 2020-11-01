@@ -52,4 +52,14 @@ public class IPLAnalysis<E> {
 
 	}
 
+	public String getFoursandSixesWiseSortedIPLMostRunsData() throws CSVBuilderException{
+		if (iplDaoList == null || iplDaoList.size() == 0) {
+			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+		}
+		Comparator<IPLDAO> iplComparator = Comparator.comparing(IPLDAO::getSixes,Comparator.reverseOrder()).thenComparing(cricketDAO ->cricketDAO.fours,Comparator.reverseOrder());
+		this.sort(iplComparator);
+		String sortedMostRuns = new Gson().toJson(iplDaoList);
+		return sortedMostRuns;
+
+	}
 }
